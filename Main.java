@@ -1,3 +1,4 @@
+import backtracking.SalasEj1;
 import tpe.GrafoDirigido;
 import tpe.ServicioBFS;
 import tpe.ServicioCaminos;
@@ -50,6 +51,37 @@ public class Main {
       ServicioCaminos servicioCaminos = new ServicioCaminos(grafo, 1, 5, 5);
       System.out.println(servicioCaminos.caminos());
 
+
+      System.out.println("---------------   BACKTRACKING   -------------------");
+
+      GrafoDirigido<String> grafoB = new GrafoDirigido<>();
+
+      grafoB.agregarVertice(1);
+      grafoB.agregarVertice(2);
+      grafoB.agregarVertice(3);
+      grafoB.agregarVertice(4);
+      grafoB.agregarVertice(5);
+      grafoB.agregarVertice(6);
+      grafoB.agregarVertice(7);
+      grafoB.agregarVertice(8);
+      grafoB.agregarVertice(9);
+
+      grafoB.agregarArco(1, 3, "C");
+      grafoB.agregarArco(1, 4, "L");
+      grafoB.agregarArco(2, 9, "A");
+      grafoB.agregarArco(2, 5, "B");
+      grafoB.agregarArco(3, 7, "E");
+      grafoB.agregarArco(4, 8, "G");
+      grafoB.agregarArco(4, 6, "I");
+      grafoB.agregarArco(5, 9, "J");
+      grafoB.agregarArco(6, 2, "K");
+      grafoB.agregarArco(6, 5, "J");
+      grafoB.agregarArco(7, 8, "O");
+      grafoB.agregarArco(8, 4, "D");
+      grafoB.agregarArco(8, 2, "F");
+
+      SalasEj1 ej1 = new SalasEj1(grafoB, 1,9);
+      ej1.getCaminoMasLargo();
 
    }
 }
