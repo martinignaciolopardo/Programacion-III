@@ -1,4 +1,4 @@
-package tpe;
+package TPE;
 
 import java.util.*;
 

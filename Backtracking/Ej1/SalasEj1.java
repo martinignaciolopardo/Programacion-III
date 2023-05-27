@@ -1,7 +1,7 @@
-package backtracking;
+package Backtracking.Ej1;
 
-import tpe.Arco;
-import tpe.Grafo;
+import TPE.Arco;
+import TPE.Grafo;
 
 import java.util.*;
 

@@ -1,7 +1,4 @@
-package tpe;
-
-import tpe.Arco;
-import tpe.Grafo;
+package TPE;
 
 import java.util.*;
 
