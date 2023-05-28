@@ -1,10 +1,14 @@
 import Backtracking.Ej1.SalasEj1;
 import Backtracking.Ej2.Casilla;
 import Backtracking.Ej2.Laberinto;
+import Backtracking.Ej3.Estado;
+import Backtracking.Ej3.SumaSubconjuntos;
 import TPE.GrafoDirigido;
 import TPE.ServicioBFS;
 import TPE.ServicioCaminos;
 import TPE.ServicioDFS;
+
+import java.util.ArrayList;
 
 public class Main {
    public static void main(String[] args) {
@@ -122,6 +126,22 @@ public class Main {
 
       Laberinto laberinto = new Laberinto(matrizLaberinto);
       laberinto.getShortestPath(0, 0,4,4);
+
+      System.out.println("\nEj3: Suma de Subconjuntos");
+
+      ArrayList<Integer> conjunto = new ArrayList<>();
+      conjunto.add(1);
+      conjunto.add(4);
+      conjunto.add(3);
+      conjunto.add(2);
+      conjunto.add(8);
+      conjunto.add(10);
+      conjunto.add(6);
+      conjunto.add(5);
+      Integer resultado = 7;
+
+      SumaSubconjuntos sumaSub = new SumaSubconjuntos(conjunto, resultado);
+      sumaSub.getSumaSubconjuntos();
 
 
    }
