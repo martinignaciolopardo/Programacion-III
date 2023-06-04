@@ -1,6 +1,5 @@
 package Backtracking.Ej10;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,41 +10,41 @@ import java.util.List;
  * Por ejemplo dado el conjunto {-7, -3, -2, -1, 5, 8 } y N = 3, los subconjuntos que suman cero son:
  * {-7, -1, 8} y {-3, -2, 5}.
  */
-public class ConjuntosDisjuntos {
+public class ZeroSumSubsets {
 
-    ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+    ArrayList<ArrayList<Integer>> result;
+    private int[] nums;
+    private int targetSize;
 
-    public ArrayList<ArrayList<Integer>> zeroSubsets(int[] nums) {
-        ArrayList<Integer> subset1 = new ArrayList<>();
-        ArrayList<Integer> subset2 = new ArrayList<>();
+    public ZeroSumSubsets(int[] nums, int targetSize) {
+        this.nums = nums;
+        this.result = new ArrayList<>();
+        this.targetSize = targetSize;
+    }
 
-        backtrack(nums, 0, subset1, subset2);
+    public ArrayList<ArrayList<Integer>> findSubsets() {
+        ArrayList<Integer> currentSubset = new ArrayList<>();
+        backtrack(0, currentSubset);
         return result;
     }
 
-    private void backtrack(int[] nums, int currentIndex, ArrayList<Integer> subset1, ArrayList<Integer> subset2) {
-        if (currentIndex == nums.length) {
-            // Se recorrieron todos los elementos
-            int sumSubset1 = sumOfElements(subset1);
-            int sumSubset2 = sumOfElements(subset2);
-
-            if ((sumSubset1 - sumSubset2) == 0){
-                result.add(subset1);
-                result.add(subset2);
+    private void backtrack(int currentIndex, ArrayList<Integer> currentSubset) {
+        if (currentSubset.size() == targetSize) {
+            if (sumOfElements(currentSubset) == 0) {
+                result.add(new ArrayList<>(currentSubset));
             }
-
+            return;
+        }
+        if (currentIndex >= nums.length) {
+            return;
         }
 
         // Incluir el elemento actual en el subset1
-        subset1.add(nums[currentIndex]);
-        backtrack(nums, currentIndex + 1, subset1, subset2);
-        subset1.remove(subset1.size() - 1); // Excluir el elemento actual de subset1
+        currentSubset.add(nums[currentIndex]);
+        backtrack(currentIndex + 1, currentSubset);
+        currentSubset.remove(currentSubset.size() - 1); // Excluir el elemento actual de subset1
 
-        // Incluir el elemento actual en el subset2
-        subset2.add(nums[currentIndex]);
-        backtrack(nums, currentIndex + 1, subset1, subset2);
-        subset2.remove(subset2.size() - 1); // Excluir el elemento actual de subset2
-
+        backtrack(currentIndex + 1, currentSubset);
     }
 
     private static int sumOfElements(List<Integer> subset) {

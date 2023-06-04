@@ -1,14 +1,17 @@
 import Backtracking.Ej1.SalasEj1;
+import Backtracking.Ej10.ZeroSumSubsets;
 import Backtracking.Ej2.Casilla;
 import Backtracking.Ej2.Laberinto;
 import Backtracking.Ej3.Estado;
 import Backtracking.Ej3.SumaSubconjuntos;
-import TPE.GrafoDirigido;
-import TPE.ServicioBFS;
-import TPE.ServicioCaminos;
-import TPE.ServicioDFS;
+import Backtracking.Ej5.TareasProcesadores;
+import Backtracking.Ej6.CaballoAtila;
+import TPE.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static Backtracking.Ej4.ConjuntosDisjuntos.canPartition;
 
 public class Main {
    public static void main(String[] args) {
@@ -143,6 +146,74 @@ public class Main {
       SumaSubconjuntos sumaSub = new SumaSubconjuntos(conjunto, resultado);
       sumaSub.getSumaSubconjuntos();
 
+      System.out.println("\nEj4: Conjuntos disjuntos");
+
+      int[] nums = {2, 3, 6, 1};
+      boolean canPartition = canPartition(nums);
+      if (canPartition) {
+         System.out.println("Se encontró una partición.");
+      } else {
+         System.out.println("No se encontró una partición.");
+      }
+
+      System.out.println("\nEj5: Procesadores");
+
+      HashMap<Integer, Integer> tareas = new HashMap<>();
+      tareas.put(1, 5);  // Tarea con ID 1 y tiempo de procesamiento 5
+      tareas.put(2, 3);  // Tarea con ID 2 y tiempo de procesamiento 3
+      tareas.put(3, 7);  // Tarea con ID 3 y tiempo de procesamiento 7
+      tareas.put(4, 12);  // Tarea con ID 4 y tiempo de procesamiento 12
+      tareas.put(5, 2);  // Tarea con ID 5 y tiempo de procesamiento 2
+      tareas.put(6, 3);  // Tarea con ID 6 y tiempo de procesamiento 3
+
+      TareasProcesadores tp = new TareasProcesadores(tareas);
+      int[] asignacionOptima = tp.asignarTareas();
+      System.out.println("Asignación óptima:");
+      for (int i = 0; i < asignacionOptima.length; i++) {
+         System.out.println("Tarea " + (i + 1) + " asignada al procesador " + asignacionOptima[i]);
+      }
+
+      System.out.println("\nEj6: Caballo de Atila");
+
+      GrafoNoDirigido<String> grafoAtila = new GrafoNoDirigido<>();
+
+      for (int i = 1; i <= 9; i++) {
+         grafoAtila.agregarVertice(i);
+      }
+
+      grafoAtila.agregarArco(1, 2, "A");
+      grafoAtila.agregarArco(1, 4, "B");
+      grafoAtila.agregarArco(2, 5, "K");
+      grafoAtila.agregarArco(3, 2, "C");
+      grafoAtila.agregarArco(3, 6, "D");
+      grafoAtila.agregarArco(4, 5, "M");
+      grafoAtila.agregarArco(6, 5, "Q");
+      grafoAtila.agregarArco(6, 9, "H");
+      grafoAtila.agregarArco(7, 8, "E");
+      grafoAtila.agregarArco(7, 4, "F");
+      grafoAtila.agregarArco(8, 5, "S");
+      grafoAtila.agregarArco(9, 8, "G");
+
+      ArrayList<Integer> pisadas = new ArrayList<>();
+      pisadas.add(1);   // x x x
+      pisadas.add(2);   // x   x
+      pisadas.add(3);   // x x x
+      pisadas.add(4);
+      pisadas.add(6);
+      pisadas.add(7);
+      pisadas.add(8);
+      pisadas.add(9);
+
+      CaballoAtila caballoAtila = new CaballoAtila(grafoAtila, pisadas);
+
+      System.out.println(caballoAtila.getCamino());
+
+      System.out.println("\nEj10: zero");
+
+      int[] subSet = {1,2,-3,4,-5,6,8,10};
+      int subSetSize = 3;
+      ZeroSumSubsets zero = new ZeroSumSubsets(subSet, subSetSize);
+      System.out.println(zero.findSubsets());
 
    }
 }
