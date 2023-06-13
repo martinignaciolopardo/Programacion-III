@@ -9,6 +9,8 @@ import Backtracking.Ej6.CaballoAtila;
 import Greedy.Ej1.Vuelto;
 import Greedy.Ej2.MochilaFraccionaria;
 import Greedy.Ej2.ObjetoFraccionario;
+import Greedy.Ej3.ActividadesCompatibles;
+import Greedy.Ej3.Reunion;
 import TPE.*;
 
 import java.util.ArrayList;
@@ -245,5 +247,26 @@ public class Main {
       MochilaFraccionaria mochi = new MochilaFraccionaria(objetos, 20D);
       mochi.greedy();
 
+      System.out.println("\nEJ3: REUNIONES: ");
+
+
+      Reunion r1 = new Reunion("a", 13,14);
+      Reunion r2 = new Reunion("b", 15,19);
+      Reunion r3 = new Reunion("c", 15,16);
+      Reunion r4 = new Reunion("d", 18,19);
+      Reunion r5 = new Reunion("e", 19,22);
+      Reunion r6 = new Reunion("f", 16,17);
+      ArrayList<Reunion> reuniones = new ArrayList<>();
+      reuniones.add(r1);
+      reuniones.add(r2);
+      reuniones.add(r3);
+      reuniones.add(r4);
+      reuniones.add(r5);
+      reuniones.add(r6);
+
+      ActividadesCompatibles ac = new ActividadesCompatibles(reuniones);
+      ac.greedy();
+
+      System.out.println("\nEJ3: REUNIONES: ");
    }
 }
