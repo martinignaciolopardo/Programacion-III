@@ -5,38 +5,6 @@ import java.util.HashMap;
 
 public class TareasProcesadores {
 
-    /*HashMap<Integer, Integer> tareas; // id tarea - tiempo procesamiento
-    HashMap<Integer, Integer> procesadores; // id procesador - tarea asignada
-
-    HashMap<Integer, Integer> rta;
-
-    public TareasProcesadores(HashMap<Integer, Integer> tareas, HashMap<Integer, Integer> procesadores) {
-        this.tareas = tareas;
-        this.procesadores = procesadores;
-    }
-
-    public HashMap<Integer, Integer> asignarTareas(){
-        int indiceActual = 0;
-        backtracking(indiceActual);
-        return null;
-    }
-
-    private HashMap<Integer, Integer> backtracking(int i){
-        Integer tareaActual = tareas.get(i+1);
-        tareas.remove(i+1);
-        rta.put(procesadores.get(0), tareaActual);
-        tareas.add(tareaActual);
-
-        Integer tareaActual2 = tareas.get(i+1);
-        rta.put(procesadores.get(1), tareaActual);
-        tareas.add(tareaActual2);
-
-        Integer tareaActual3 = tareas.get(i+1);
-        rta.put(procesadores.get(2), tareaActual);
-        tareas.add(tareaActual3);
-        return null;
-    }*/
-
     private int[][] asignacion;
     private HashMap<Integer, Integer> tareas;
     private int[] mejorAsignacion;

@@ -6,6 +6,9 @@ import Backtracking.Ej3.Estado;
 import Backtracking.Ej3.SumaSubconjuntos;
 import Backtracking.Ej5.TareasProcesadores;
 import Backtracking.Ej6.CaballoAtila;
+import Greedy.Ej1.Vuelto;
+import Greedy.Ej2.MochilaFraccionaria;
+import Greedy.Ej2.ObjetoFraccionario;
 import TPE.*;
 
 import java.util.ArrayList;
@@ -214,6 +217,33 @@ public class Main {
       int subSetSize = 3;
       ZeroSumSubsets zero = new ZeroSumSubsets(subSet, subSetSize);
       System.out.println(zero.findSubsets());
+
+      /*-------------------------------------- GREEDY ----------------------------------------*/
+
+      System.out.println("GREEDY: ");
+      System.out.println("\nEJ1: VUELTO: ");
+
+      ArrayList<Integer> conj = new ArrayList<>();
+      conj.add(100);
+      conj.add(25);
+      conj.add(10);
+      conj.add(5);
+      conj.add(1);
+      Vuelto v = new Vuelto(conj, 289);
+      v.greedy();
+
+      System.out.println("\nEJ2: MOCHILA: ");
+
+      ArrayList<ObjetoFraccionario> objetos = new ArrayList<>();
+      ObjetoFraccionario pan = new ObjetoFraccionario(18D,25D, "pan");
+      ObjetoFraccionario milanesa = new ObjetoFraccionario(15D,24D, "milanesa");
+      ObjetoFraccionario mayonesa = new ObjetoFraccionario(10D,15D, "mayonesa");
+      objetos.add(pan);
+      objetos.add(milanesa);
+      objetos.add(mayonesa);
+
+      MochilaFraccionaria mochi = new MochilaFraccionaria(objetos, 20D);
+      mochi.greedy();
 
    }
 }
