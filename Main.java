@@ -12,6 +12,8 @@ import Greedy.Ej3.ActividadesCompatibles;
 import Greedy.Ej3.Reunion;
 import Greedy.Ej6.Viajante;
 import Greedy.Ej7.CazadorLeones;
+import Greedy.Ej8.ArmandoCDs;
+import Greedy.Ej8.Cancion;
 import TPE.*;
 
 import java.util.ArrayList;
@@ -223,8 +225,8 @@ public class Main {
 
       /*-------------------------------------- GREEDY ----------------------------------------*/
 
-      System.out.println("GREEDY: ");
-      System.out.println("\nEJ1: VUELTO: ");
+      System.out.println("GREEDY");
+      System.out.println("\nEJ1: VUELTO");
 
       ArrayList<Integer> conj = new ArrayList<>();
       conj.add(100);
@@ -235,7 +237,7 @@ public class Main {
       Vuelto v = new Vuelto(conj, 289);
       v.greedy();
 
-      System.out.println("\nEJ2: MOCHILA: ");
+      System.out.println("\nEJ2: MOCHILA");
 
       ArrayList<ObjetoFraccionario> objetos = new ArrayList<>();
       ObjetoFraccionario pan = new ObjetoFraccionario(18D,25D, "pan");
@@ -248,7 +250,7 @@ public class Main {
       MochilaFraccionaria mochi = new MochilaFraccionaria(objetos, 20D);
       mochi.greedy();
 
-      System.out.println("\nEJ3: REUNIONES: ");
+      System.out.println("\nEJ3: REUNIONES");
 
 
       Reunion r1 = new Reunion("a", 13,14);
@@ -268,9 +270,9 @@ public class Main {
       ActividadesCompatibles ac = new ActividadesCompatibles(reuniones);
       ac.greedy();
 
-      System.out.println("\nEJ4: DIJKSTRA: ");
+      System.out.println("\nEJ4: DIJKSTRA");
 
-      System.out.println("\nEJ5: VIAJANTE: ");
+      System.out.println("\nEJ5: VIAJANTE");
 
       GrafoNoDirigido grafoViajante = new GrafoNoDirigido();
       grafoViajante.agregarVertice(1);
@@ -295,7 +297,7 @@ public class Main {
       Viajante viajante = new Viajante(grafoViajante, 4);
       viajante.problemaViajante();
 
-      System.out.println("\nEJ6: CAZADOR DE LEONES: ");
+      System.out.println("\nEJ6: CAZADOR DE LEONES");
 
       ArrayList<Boolean> cazadoresAndLeones = new ArrayList<>();
       cazadoresAndLeones.add(true);
@@ -310,5 +312,46 @@ public class Main {
 
       CazadorLeones c = new CazadorLeones(cazadoresAndLeones, pasos);
       c.cazar();
+
+      System.out.println("\nEJ6: GRABAR CD");
+
+      Cancion c1 = new Cancion("Solo aqui", "Rock", 4.34, 5.35);
+      Cancion c2 = new Cancion("Esta saliendo el sol", "Rock", 4.12, 4.92);
+      Cancion c3 = new Cancion("Religion", "Rock", 4.41, 5.49);
+      Cancion c4 = new Cancion("Hay momentos", "Rock", 4.46, 5.39);
+      Cancion c5 = new Cancion("Nothing else matters", "Rock", 6.26, 7.54);
+      Cancion c6 = new Cancion("Enter sandman", "Rock", 5.31, 6.46);
+
+      ArrayList<Cancion> conjuntoCanciones = new ArrayList<>();
+      conjuntoCanciones.add(c1);
+      conjuntoCanciones.add(c2);
+      conjuntoCanciones.add(c3);
+      conjuntoCanciones.add(c4);
+      conjuntoCanciones.add(c5);
+      conjuntoCanciones.add(c6);
+
+      Double capacidad = 23.59;
+
+      ArmandoCDs cdEspacio = new ArmandoCDs(conjuntoCanciones, capacidad);
+
+      cdEspacio.maximizarEspacio();
+
+      Cancion cc1 = new Cancion("Solo aqui", "Rock", 4.34, 5.35);
+      Cancion cc2 = new Cancion("Esta saliendo el sol", "Rock", 4.12, 4.92);
+      Cancion cc3 = new Cancion("Religion", "Rock", 4.41, 5.49);
+      Cancion cc4 = new Cancion("Hay momentos", "Rock", 4.46, 5.39);
+      Cancion cc5 = new Cancion("Nothing else matters", "Rock", 6.26, 7.54);
+      Cancion cc6 = new Cancion("Enter sandman", "Rock", 5.31, 6.46);
+
+      ArrayList<Cancion> conjuntoCanciones2 = new ArrayList<>();
+      conjuntoCanciones2.add(cc1);
+      conjuntoCanciones2.add(cc2);
+      conjuntoCanciones2.add(cc3);
+      conjuntoCanciones2.add(cc4);
+      conjuntoCanciones2.add(cc5);
+      conjuntoCanciones2.add(cc6);
+
+      ArmandoCDs cdCantidad = new ArmandoCDs(conjuntoCanciones2, capacidad);
+      cdCantidad.maximizarCantidad();
    }
 }

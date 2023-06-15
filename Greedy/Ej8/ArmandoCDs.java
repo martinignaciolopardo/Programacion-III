@@ -12,15 +12,99 @@ import java.util.ArrayList;
  * mismo género.
  */
 public class ArmandoCDs {
-    
+
+    private ArrayList<Cancion> conjuntoCanciones;
     private ArrayList<Cancion> cd;
-    private ArrayList<Cancion> cd;
+
+    private Double capacidad;
+
+    public ArmandoCDs(ArrayList<Cancion> conjuntoCanciones, Double capacidad) {
+        this.conjuntoCanciones = conjuntoCanciones;
+        this.capacidad = capacidad;
+        this.cd = new ArrayList<>();
+    }
 
     public void maximizarEspacio(){
-
+        while(!conjuntoCanciones.isEmpty()){
+            Cancion c = cancionEficiente();
+            if (c != null){
+                if (this.getSuma() + c.getDuracion() <= this.capacidad){
+                    cd.add(c);
+                }
+                else{
+                    break;
+                }
+            }
+            else {
+                System.out.println("no quedan canciones.");
+                break;
+            }
+        }
+        System.out.println("Maximizar espacio: ");
+        for (Cancion cancion:cd) {
+            System.out.println(cancion.getNombre() + " / " + cancion.getDuracion() + "Min / " + cancion.getKbs() + "KB");
+        }
     }
 
     public void maximizarCantidad(){
+        while(!conjuntoCanciones.isEmpty()) {
+            Cancion c = cancionMenorTamanio();
+            if (c != null){
+                if (this.getSuma() + c.getDuracion() <= this.capacidad){
+                    cd.add(c);
+                }
+                else{
+                    break;
+                }
+            }
+            else {
+                System.out.println("no quedan canciones.");
+                break;
+            }
+        }
+        System.out.println("\nMaximizar cantidad canciones: ");
+        for (Cancion cancion:cd) {
+            System.out.println(cancion.getNombre() + " / " + cancion.getDuracion() + "Min / " + cancion.getKbs() + "KB");
+        }
+    }
 
+    private Cancion cancionEficiente(){
+        Double masEficiente = 0.0;
+        Cancion cancion = null;
+        for (Cancion c: conjuntoCanciones) {
+            Double eficienciaActual = c.getDuracion()/c.getKbs();
+            if (eficienciaActual > masEficiente){
+                masEficiente = eficienciaActual;
+                cancion = c;
+            }
+        }
+        if (cancion != null){
+            conjuntoCanciones.remove(cancion);
+        }
+        return cancion;
+    }
+
+    private Double getSuma(){
+        Double tamanioActual = 0.0;
+        for (Cancion cancion:cd) {
+            tamanioActual += cancion.getDuracion();
+        }
+        return tamanioActual;
+    }
+
+    private Cancion cancionMenorTamanio(){
+        Double menorTamanio = Double.MAX_VALUE;
+        Cancion cancion = null;
+        for (Cancion c: conjuntoCanciones) {
+            Double menorTamanioActual = c.getKbs();
+            if (menorTamanioActual < menorTamanio){
+                menorTamanio = menorTamanioActual;
+                cancion = c;
+            }
+        }
+        if (cancion != null){
+            conjuntoCanciones.remove(cancion);
+        }
+        return cancion;
     }
 }
