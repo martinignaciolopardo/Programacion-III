@@ -11,6 +11,8 @@ import Greedy.Ej2.MochilaFraccionaria;
 import Greedy.Ej2.ObjetoFraccionario;
 import Greedy.Ej3.ActividadesCompatibles;
 import Greedy.Ej3.Reunion;
+import Greedy.Ej5.Viajante;
+import Greedy.Ej6.CazadorLeones;
 import TPE.*;
 
 import java.util.ArrayList;
@@ -267,6 +269,47 @@ public class Main {
       ActividadesCompatibles ac = new ActividadesCompatibles(reuniones);
       ac.greedy();
 
-      System.out.println("\nEJ3: REUNIONES: ");
+      System.out.println("\nEJ4: DIJKSTRA: ");
+
+      System.out.println("\nEJ5: VIAJANTE: ");
+
+      GrafoNoDirigido grafoViajante = new GrafoNoDirigido();
+      grafoViajante.agregarVertice(1);
+      grafoViajante.agregarVertice(2);
+      grafoViajante.agregarVertice(3);
+      grafoViajante.agregarVertice(4);
+      grafoViajante.agregarVertice(5);
+      grafoViajante.agregarVertice(6);
+      grafoViajante.agregarVertice(7);
+      grafoViajante.agregarVertice(8);
+      grafoViajante.agregarArco(1,3,20);
+      grafoViajante.agregarArco(3,2,25);
+      grafoViajante.agregarArco(3,4,30);
+      grafoViajante.agregarArco(5,4,5);
+      grafoViajante.agregarArco(6,4,15);
+      grafoViajante.agregarArco(6,1,5);
+      grafoViajante.agregarArco(7,1,10);
+      grafoViajante.agregarArco(7,2,10);
+      grafoViajante.agregarArco(8,5,40);
+      grafoViajante.agregarArco(8,6,35);
+
+      Viajante viajante = new Viajante(grafoViajante, 4);
+      viajante.problemaViajante();
+
+      System.out.println("\nEJ6: CAZADOR DE LEONES: ");
+
+      ArrayList<Boolean> cazadoresAndLeones = new ArrayList<>();
+      cazadoresAndLeones.add(true);
+      cazadoresAndLeones.add(false);
+      cazadoresAndLeones.add(true);
+      cazadoresAndLeones.add(true);
+      cazadoresAndLeones.add(true);
+      cazadoresAndLeones.add(false);
+      cazadoresAndLeones.add(true);
+
+      Integer pasos = 4;
+
+      CazadorLeones c = new CazadorLeones(cazadoresAndLeones, pasos);
+      c.cazar();
    }
 }
