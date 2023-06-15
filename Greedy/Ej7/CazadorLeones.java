@@ -1,4 +1,4 @@
-package Greedy.Ej6;
+package Greedy.Ej7;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package Greedy.Ej5;
+package Greedy.Ej6;
 
 import TPE.GrafoNoDirigido;
 

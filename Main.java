@@ -2,7 +2,6 @@ import Backtracking.Ej1.SalasEj1;
 import Backtracking.Ej10.ZeroSumSubsets;
 import Backtracking.Ej2.Casilla;
 import Backtracking.Ej2.Laberinto;
-import Backtracking.Ej3.Estado;
 import Backtracking.Ej3.SumaSubconjuntos;
 import Backtracking.Ej5.TareasProcesadores;
 import Backtracking.Ej6.CaballoAtila;
@@ -11,8 +10,8 @@ import Greedy.Ej2.MochilaFraccionaria;
 import Greedy.Ej2.ObjetoFraccionario;
 import Greedy.Ej3.ActividadesCompatibles;
 import Greedy.Ej3.Reunion;
-import Greedy.Ej5.Viajante;
-import Greedy.Ej6.CazadorLeones;
+import Greedy.Ej6.Viajante;
+import Greedy.Ej7.CazadorLeones;
 import TPE.*;
 
 import java.util.ArrayList;
