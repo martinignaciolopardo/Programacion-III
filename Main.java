@@ -15,6 +15,7 @@ import Greedy.Ej7.CazadorLeones;
 import Greedy.Ej8.ArmandoCDs;
 import Greedy.Ej8.Cancion;
 import TPE.*;
+import TPE2.CSVReader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -353,5 +354,11 @@ public class Main {
 
       ArmandoCDs cdCantidad = new ArmandoCDs(conjuntoCanciones2, capacidad);
       cdCantidad.maximizarCantidad();
+
+      System.out.println("\nTPE PARTE 2: ");
+
+      CSVReader csv = new CSVReader("src/TPE2/datasets/dataset1.txt");
+      csv.read();
+
    }
 }
