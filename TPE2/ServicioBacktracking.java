@@ -2,6 +2,7 @@ package TPE2;
 
 import TPE.Arco;
 import TPE.Grafo;
+import TPE.GrafoNoDirigido;
 
 import java.util.*;
 
@@ -10,81 +11,119 @@ public class ServicioBacktracking {
     private Grafo<?> grafo;
     private HashMap<Integer, ArrayList<Integer>> solucion = new HashMap<>();
     private int iteraciones;
+    private int menorDistancia;
+    private int cantVertices;
+
+    private List<Arco<?>> mejorSolucion;
+
+    private ArrayList<Integer> verticesGrafo = new ArrayList<>();
+
+    private int distanciaGreedy;
 
     public ServicioBacktracking(Grafo<?> grafo) {
         this.grafo = grafo;
         this.iteraciones = 0;
+        this.menorDistancia = Integer.MAX_VALUE;
+        this.cantVertices = grafo.cantidadVertices();
     }
 
-    public HashMap<Integer, ArrayList<Integer>> caminos() {
-        List<List<Integer>> caminos = new ArrayList<>();
-        List<Integer> caminoActual = new ArrayList<>();
-        HashMap<Integer, Boolean> visitado = new HashMap<>();
-        Integer menorDistancia = Integer.MAX_VALUE;
+    public ArrayList<String> caminos() {
+        ArrayList<Arco<?>> caminoActual = new ArrayList<>();
+        mejorSolucion = new ArrayList<>();
+        HashMap<Arco<?>, Boolean> arcoVisitado = new HashMap<>();
+        ArrayList<Integer> visitado = new ArrayList<>();
+        //ServicioGreedy s = new ServicioGreedy((GrafoNoDirigido<Integer>) grafo);
+        //s.camino();
+        //int distanciaGreedy = s.getMenorDistancia();
 
+        Iterator<? extends Arco<?>> arcos = this.grafo.obtenerArcos();
+        while (arcos.hasNext()) {
+            Arco<?> arco = arcos.next();
+            arcoVisitado.put(arco, false);
+        }
         Iterator<Integer> vertices = this.grafo.obtenerVertices();
-        while (vertices.hasNext()) {
-            int verticeId = vertices.next();
-            visitado.put(verticeId, false);
+        int vertice = vertices.next();
+        visitado.add(vertice);
+        encontrarMejorCamino(vertice, caminoActual, visitado, arcoVisitado, 0, 0);
+
+        ArrayList<String> solucion = new ArrayList<>();
+        for (Arco<?> arco : mejorSolucion) {
+            solucion.add(arco.getVerticeOrigen() + "-" + arco.getVerticeDestino());
         }
-        Iterator<Integer> vertices2 = this.grafo.obtenerVertices();
-        while (vertices2.hasNext()) {
-            int verticeId = vertices2.next();
-            if (!visitado.get(verticeId)) {
-                visitado.put(verticeId, true);
-                encontrarCaminos(verticeId, caminoActual, caminos, visitado, menorDistancia);
-            }
-        }
-        Integer claveMasChica = null;
-        ArrayList<Integer> valorClaveMasChica = null;
-        for (Map.Entry<Integer, ArrayList<Integer>> entry : solucion.entrySet()) {
-            if (claveMasChica == null || entry.getKey() < claveMasChica) {
-                claveMasChica = entry.getKey();
-                valorClaveMasChica = entry.getValue();
-            }
-        }
-        System.out.println("Menor distancia: " + claveMasChica);
-        System.out.println("Menor camino: " + valorClaveMasChica);
-        System.out.println("iteraciones: " + iteraciones);
         return solucion;
 
     }
 
-    private void encontrarCaminos(int verticeActual, List<Integer> caminoActual, List<List<Integer>> caminos, Map<Integer, Boolean> visitado, Integer menorDistancia) {
-        caminoActual.add(verticeActual);
-        iteraciones++;
-        if (caminoActual.size() == grafo.cantidadVertices()) {
-            int suma = getSuma(caminoActual);
-            caminos.add(new ArrayList<>(caminoActual));
-            if (suma < menorDistancia){
-                menorDistancia = suma;
-            }
-            solucion.put(suma, new ArrayList<>(caminoActual));
-        }
-        //System.out.println("vertice: " + verticeActual + "Actual: " + getSuma(caminoActual) + " - Menor: "+menorDistancia);
-        //if (getSuma(caminoActual) < menorDistancia){
-            Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(verticeActual);
-            while (adyacentes.hasNext()) {
-                int verticeAdy = adyacentes.next();
-                if (!visitado.get(verticeAdy)) {
-                    visitado.put(verticeAdy, true);
-                    encontrarCaminos(verticeAdy, caminoActual, caminos, visitado, menorDistancia);
-                    visitado.put(verticeAdy, false);
+    private void encontrarMejorCamino(int verticeActual, List<Arco<?>> caminoActual, List<Integer> visitado, Map<Arco<?>, Boolean> arcoVisitado, int distActual, int cantArcos) {
+        if (distActual < distanciaGreedy) {
+            boolean flag = false;
+            if (visitado.size() == cantVertices) {
+                if (distActual < menorDistancia) {
+                    mejorSolucion.clear();
+                    mejorSolucion.addAll(caminoActual);
+                    menorDistancia = distActual;
+                }
+            } else {
+                int arcosRestantes = cantVertices - visitado.size();
+                int arcosMaximos = menorDistancia - distActual;
+                if (cantArcos + arcosRestantes > arcosMaximos) {
+                    return;
+                }
+                List<Arco<?>> arcosNoVisitados = new ArrayList<>();
+                Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(verticeActual);
+                while (adyacentes.hasNext()) {
+                    iteraciones++;
+                    Integer ady = adyacentes.next();
+                    Arco<?> arco = grafo.obtenerArco(verticeActual, ady);
+                    if (!arcoVisitado.get(arco) && !caminoActual.contains(arco)) {
+                        arcosNoVisitados.add(arco);
+                    }
+                }
+                for (Arco<?> arco : arcosNoVisitados) {
+                    Integer ady = arco.getVerticeDestino();
+                    Arco<?> arco2 = grafo.obtenerArco(ady, verticeActual);
+
+                    if (!visitado.contains(ady)) {
+                        visitado.add(ady);
+                        flag = true;
+                    }
+
+                    if (!caminoActual.contains(arco2)) {
+                        caminoActual.add(arco);
+                        distActual += (Integer) arco.getEtiqueta();
+                    }
+                    arcoVisitado.put(arco, true);
+
+                    encontrarMejorCamino(ady, caminoActual, visitado, arcoVisitado, distActual, +1);
+
+                    if (flag) {
+                        visitado.remove(ady);
+                        flag = false;
+                    }
+
+                    if (!caminoActual.contains(arco2)) {
+                        caminoActual.remove(arco);
+                        distActual -= (Integer) arco.getEtiqueta();
+                    }
+                    arcoVisitado.put(arco, false);
                 }
             }
-        //}
-        caminoActual.remove(caminoActual.size() - 1);
+        }
     }
 
-    private Integer getSuma(List<Integer> caminoActual){
-        int suma = 0;
-        for (int i = 0; i < caminoActual.size() - 1; i++) {
-            int j = i + 1;
-            Arco<?> arco = grafo.obtenerArco(caminoActual.get(i), caminoActual.get(j));
-            String etiquetaString = arco.getEtiqueta().toString();
-            int aux = Integer.parseInt(etiquetaString);
-            suma += aux;
-        }
-        return suma;
+    public int getIteraciones() {
+        return iteraciones;
+    }
+
+    public int getMenorDistancia() {
+        return menorDistancia;
+    }
+
+    public int getDistanciaGreedy() {
+        return distanciaGreedy;
+    }
+
+    public void setDistanciaGreedy(int distanciaGreedy) {
+        this.distanciaGreedy = distanciaGreedy;
     }
 }

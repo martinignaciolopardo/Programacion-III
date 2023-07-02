@@ -25,7 +25,7 @@ import static Backtracking.Ej4.ConjuntosDisjuntos.canPartition;
 public class Main {
    public static void main(String[] args) {
 
-      GrafoDirigido<String> grafo = new GrafoDirigido<>();
+      /*GrafoDirigido<String> grafo = new GrafoDirigido<>();
 
       grafo.agregarVertice(1);
       grafo.agregarVertice(2);
@@ -226,7 +226,7 @@ public class Main {
 
       /*-------------------------------------- GREEDY ----------------------------------------*/
 
-      System.out.println("GREEDY");
+      /*System.out.println("GREEDY");
       System.out.println("\nEJ1: VUELTO");
 
       ArrayList<Integer> conj = new ArrayList<>();
@@ -353,11 +353,11 @@ public class Main {
       conjuntoCanciones2.add(cc6);
 
       ArmandoCDs cdCantidad = new ArmandoCDs(conjuntoCanciones2, capacidad);
-      cdCantidad.maximizarCantidad();
+      cdCantidad.maximizarCantidad();*/
 
       System.out.println("\nTPE PARTE 2: ");
 
-      CSVReader csv = new CSVReader("src/TPE2/datasets/dataset1.txt");
+      CSVReader csv = new CSVReader("src/TPE2/datasets/dataset3.txt");
       csv.read();
 
    }
